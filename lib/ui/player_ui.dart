@@ -25,15 +25,17 @@ class _PlayerScreenState extends State<PlayerScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            // 音频URL输入框
             TextField(
               controller: _urlController,
               maxLines: 3,
               decoration: const InputDecoration(
-                labelText: "音乐流URL（Subsonic协议）",
+                labelText: "音乐流URL（Subsonic/Navidrome）",
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 20),
+            // 播放控制按钮
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -49,21 +51,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   color: Colors.blue,
                 ),
               ],
-            ),
-            const SizedBox(height: 20),
-            StreamBuilder<Duration>(
-              stream: AudioPlayerManager.player.positionStream,
-              builder: (context, snapshot) {
-                final position = snapshot.data ?? Duration.zero;
-                final duration = AudioPlayerManager.player.duration ?? Duration.zero;
-                return Slider(
-                  value: position.inSeconds.toDouble(),
-                  max: duration.inSeconds.toDouble(),
-                  onChanged: (value) {
-                    AudioPlayerManager.player.seek(Duration(seconds: value.toInt()));
-                  },
-                );
-              },
             ),
           ],
         ),

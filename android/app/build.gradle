@@ -32,7 +32,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-        coreLibraryDesugaringEnabled true
     }
 
     kotlinOptions {
@@ -45,11 +44,11 @@ android {
 
     defaultConfig {
         applicationId "com.example.simplestreammusic"
-        minSdkVersion 19
+        minSdkVersion 19  // Android 4.4
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        multiDexEnabled true
+        // 移除 multiDexEnabled（V2 嵌入无需手动开启）
     }
 
     signingConfigs {
@@ -76,6 +75,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
-    implementation 'com.android.support:multidex:1.0.3'
+    // 移除 coreLibraryDesugaring 和 multidex 依赖（V2 嵌入自动兼容）
 }
